@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Your Portfolio
+{% endblock %}
+
+{% block main %}
+    
+    <h1>Your Portfolio</h1>
+    <h2>{{ username }}</h2>
+    <p>Your liquid cash: {{ cash }}<p>
+    <table class="table table-striped">
+        <tr>
+            <th>Stock</th>
+            <th>Shares</th>
+            <th>Current Price</th>
+            <th>Total Value</th>
+            <th>Transact</th>
+        </tr>
+        {% for item in portfolio %}
+            <tr>
+                <td>{{ item['stock'] }}</td>
+                <td>{{ item['shares'] }}</td>
+                <td>{{ item['current_price'] }}</td>
+                <td>{{ item['total_value'] }}</td>
+                <td>
+                        <form action="/buy" method="get">
+                            <button class="btn btn-primary" type="submit" name="buy_{{ item['stock'] }}">Buy</button>
+                        </form>
+                </td>
+                <td>
+                    <form action="/sell" method="get">
+                        <button class="btn btn-primary" type="submit" name="sell_{{ item['stock'] }}">Sell</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        <tr class="table-success">
+            <td></td>
+            <td></td>
+            <td>Total Stock Value:</td>
+            <td>{{netWorth}}</td>
+        </tr>
+    </table>
+    <h2>Your total portfolio value: {{ totalPValue }}</h2>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Your Transaction History
+{% endblock %}
+
+{% block main %}
+    <h1>Your Transaction History</h1>
+    <table class="table table-striped">
+        <tr>
+            <th>Date</th>
+            <th>Stock</th>
+            <th>Type</th>
+            <th>Shares</th>
+            <th>Price</th>
+        </tr>
+        {% for item in userHistory %}
+            <tr>
+                <td>{{ item['date'] }}</td>
+                <td>{{ item['symbol'] }}</td>
+                <td>{{ item['type'] }}</td>
+                <td>{{ item['shares'] }}</td>
+                <td>{{ item['price'] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
